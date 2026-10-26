@@ -1,0 +1,93 @@
+[
+    // removes the defaults that are reused below: go to file, open recent, find
+    { "key": "ctrl+e", "command": "-workbench.action.quickOpen" },
+    { "key": "ctrl+r", "command": "-workbench.action.openRecent" },
+    { "key": "ctrl+f", "command": "-actions.find" },
+
+    // open the command palette
+    { "key": "ctrl+w", "command": "-workbench.action.quickOpen" },
+    { "key": "ctrl+w", "command": "workbench.action.showCommands" },
+
+    // search for a file to open, press again to go back one result
+    { "key": "ctrl+t", "command": "workbench.action.quickOpen" },
+    { "key": "ctrl+t", "command": "workbench.action.quickOpenNavigatePreviousInFilePicker", "when": "inFilesPicker && inQuickOpen" },
+
+    // show or hide the left / right side bar
+    { "key": "alt+q", "command": "workbench.action.toggleSidebarVisibility" },
+    { "key": "alt+e", "command": "workbench.action.toggleAuxiliaryBar" },
+
+    // new empty tile on the right, then pick a file for it
+    {
+        "key": "alt+v",
+        "command": "runCommands",
+        "args": { "commands": ["workbench.action.newGroupRight", "workbench.action.quickOpen"] }
+    },
+
+    // same, but below
+    {
+        "key": "alt+b",
+        "command": "runCommands",
+        "args": { "commands": ["workbench.action.newGroupBelow", "workbench.action.quickOpen"] }
+    },
+
+    // close the current file, or the tile if it is already empty
+    { "key": "alt+c", "command": "workbench.action.closeGroup", "when": "activeEditorGroupEmpty" },
+    { "key": "alt+c", "command": "workbench.action.closeActiveEditor", "when": "!activeEditorGroupEmpty" },
+
+    // while the file search is open: close it, and the empty tile it was opened for
+    {
+        "key": "alt+c",
+        "command": "runCommands",
+        "args": { "commands": ["workbench.action.closeQuickOpen", "workbench.action.closeGroup"] },
+        "when": "inQuickOpen && activeEditorGroupEmpty"
+    },
+    { "key": "alt+c", "command": "workbench.action.closeQuickOpen", "when": "inQuickOpen && !activeEditorGroupEmpty" },
+
+    // make the current tile fill the window, repeat to go back
+    { "key": "alt+f", "command": "workbench.action.toggleMaximizeEditorGroup" },
+
+    // go to the tile on the left, right, above, below
+    { "key": "ctrl+q", "command": "workbench.action.navigateLeft" },
+    { "key": "ctrl+e", "command": "workbench.action.navigateRight" },
+    { "key": "ctrl+r", "command": "workbench.action.navigateUp" },
+    { "key": "ctrl+f", "command": "workbench.action.navigateDown" },
+
+    // go to the tile by its number
+    { "key": "alt+1", "command": "workbench.action.focusFirstEditorGroup" },
+    { "key": "alt+2", "command": "workbench.action.focusSecondEditorGroup" },
+    { "key": "alt+3", "command": "workbench.action.focusThirdEditorGroup" },
+    { "key": "alt+4", "command": "workbench.action.focusFourthEditorGroup" },
+    { "key": "alt+5", "command": "workbench.action.focusFifthEditorGroup" },
+    { "key": "alt+6", "command": "workbench.action.focusSixthEditorGroup" },
+    { "key": "alt+7", "command": "workbench.action.focusSeventhEditorGroup" },
+    { "key": "alt+8", "command": "workbench.action.focusEighthEditorGroup" },
+
+    // move the file into the column on the left / right, below the tile that is there
+    {
+        "key": "alt+shift+q",
+        "command": "runCommands",
+        "args": { "commands": ["workbench.action.moveEditorToLeftGroup", "workbench.action.moveEditorToBelowGroup"] }
+    },
+    {
+        "key": "alt+shift+e",
+        "command": "runCommands",
+        "args": { "commands": ["workbench.action.moveEditorToRightGroup", "workbench.action.moveEditorToBelowGroup"] }
+    },
+
+    // move the whole tile up / down (alt+shift+f was format document)
+    { "key": "alt+shift+r", "command": "workbench.action.moveActiveEditorGroupUp" },
+    { "key": "alt+shift+f", "command": "-editor.action.formatDocument", "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor" },
+    { "key": "alt+shift+f", "command": "workbench.action.moveActiveEditorGroupDown" },
+
+    // format the file
+    { "key": "alt+g", "command": "editor.action.formatDocument", "when": "editorHasDocumentFormattingProvider && editorTextFocus && !editorReadonly && !inCompositeEditor" },
+
+    // make the tile narrower / wider (these keys no longer indent)
+    { "key": "ctrl+[", "command": "-editor.action.outdentLines", "when": "editorTextFocus && !editorReadonly" },
+    { "key": "ctrl+]", "command": "-editor.action.indentLines", "when": "editorTextFocus && !editorReadonly" },
+    { "key": "ctrl+[", "command": "workbench.action.decreaseViewSize" },
+    { "key": "ctrl+]", "command": "workbench.action.increaseViewSize" },
+
+    // make all tiles the same size
+    { "key": "alt+0", "command": "workbench.action.evenEditorWidths" }
+]
